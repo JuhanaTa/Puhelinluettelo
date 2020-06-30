@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 if (process.argv.length<3) {
-  console.log('give password as argument')
-  process.exit(1)
+    console.log('give password as argument')
+    process.exit(1)
 }
 
 const password = process.argv[2]
@@ -14,10 +14,10 @@ const url =
 
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true,  })
-console.log("mongo.js connection")
+console.log('mongo.js connection')
 const personSchema = new mongoose.Schema({
-  name: String,
-  number: String,
+    name: String,
+    number: String,
 })
 
 const Person = mongoose.model('Person', personSchema)
@@ -25,16 +25,15 @@ const Person = mongoose.model('Person', personSchema)
 if(name === undefined|| number === undefined){
     Person.find({}).then(result => {
         result.forEach(person => {
-          console.log(person)
-          
+            console.log(person)
         })
         mongoose.connection.close()
-      })
+    })
 }else{
 
     const person = new Person({
-    name: `${name}`,
-    number: `${number}`,
+        name: `${name}`,
+        number: `${number}`,
     })
 
     person.save().then(result => {
